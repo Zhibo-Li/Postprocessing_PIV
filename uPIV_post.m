@@ -101,10 +101,10 @@ end
 % data = readmatrix('D:\Dropbox\PROCESS remotely\Simulation\202208\uPIVexp_H52\Ux_Z-direction.csv');
 % Speed_Simu = data(1:10:end, 1); ZZ = data(1:10:end, 9);
 % plot(ZZ*1e5, Speed_Simu*1e7, 'r--.', 'LineWidth', 2); hold on
-% xlabel('$Z\ ({\mu}m)$','FontSize',18,'Interpreter', 'latex');
-% ylabel('$U_x\ ({\mu}m/s)$','FontSize',18,'Interpreter', 'latex');
+% xlabel('$Z\ ({\mu}m)$','FontSize',22,'Interpreter', 'latex');
+% ylabel('$U_x\ ({\mu}m/s)$','FontSize',22,'Interpreter', 'latex');
 % % % title('Speed in the Middle Plane','FontSize',48);
-% % set(gca,'FontSize',36)
+% set(gca,'FontSize',20)
 % legend('PIV','Simulation','location','best','FontSize',20)
 % xlim([-0.5 52.5])
 % % f=gcf;
@@ -118,10 +118,10 @@ end
 % data = readmatrix('D:\Dropbox\PROCESS remotely\Simulation\202208\uPIVexp_H52\Ux_Z-direction.csv');
 % Speed_Simu = data(1:10:end, 1); ZZ = data(1:10:end, 9);
 % plot(ZZ*1e5/52, Speed_Simu*1e7/157, 'r--.', 'LineWidth', 2); hold on
-% xlabel('$Z/H$','FontSize',18,'Interpreter', 'latex');
-% ylabel('$U_x/U_{peak}\ in\ blank\ area$','FontSize',18,'Interpreter', 'latex');
+% xlabel('$Z/H$','FontSize',22,'Interpreter', 'latex');
+% ylabel('$U_x/U_{peak}\ in\ blank\ area$','FontSize',22,'Interpreter', 'latex');
 % % % title('Speed in the Middle Plane','FontSize',48);
-% % set(gca,'FontSize',36)
+% set(gca,'FontSize',20)
 % legend('PIV','Simulation','location','best','FontSize',20)
 % xlim([0 1])
 % % f=gcf;
@@ -136,10 +136,10 @@ end
 % Speed_Simu = data(1:2:end, 1); XX = data(1:2:end, 7);
 % errorbar(XXX_alongX(1:140), VVV_alongX(1:140)*1e6, VVV_alongX_err(1:140)*1e6,'LineStyle','none', 'Marker','*','MarkerSize', 5); hold on
 % plot(XX*1e5, Speed_Simu*1e7, 'r--.', 'LineWidth', 2); hold on
-% xlabel('$X\ ({\mu}m)$','FontSize',18,'Interpreter', 'latex');
-% ylabel('$U_x\ ({\mu}m/s)$','FontSize',18,'Interpreter', 'latex');
+% xlabel('$X\ ({\mu}m)$','FontSize',22,'Interpreter', 'latex');
+% ylabel('$U_x\ ({\mu}m/s)$','FontSize',22,'Interpreter', 'latex');
 % % % title('Speed in the Middle Plane','FontSize',48);
-% % set(gca,'FontSize',36)
+% set(gca,'FontSize',20)
 % legend('PIV','Simulation','location','best','FontSize',20)
 % xlim([-0.5 115])
 % % f=gcf;
@@ -154,10 +154,10 @@ end
 % Speed_Simu = data(1:2:end, 1); XX = data(1:2:end, 7);
 % errorbar(XXX_alongX(1:140), VVV_alongX(1:140)*1e6/147, VVV_alongX_err(1:140)*1e6/147,'LineStyle','none', 'Marker','*','MarkerSize', 5); hold on
 % plot(XX*1e5, Speed_Simu*1e7/157, 'r--.', 'LineWidth', 2); hold on
-% xlabel('$X\ ({\mu}m)$','FontSize',18,'Interpreter', 'latex');
-% ylabel('$U_x/U_{peak}\ in\ blank\ area$','FontSize',18,'Interpreter', 'latex');
+% xlabel('$X\ ({\mu}m)$','FontSize',22,'Interpreter', 'latex');
+% ylabel('$U_x/U_{peak}\ in\ blank\ area$','FontSize',22,'Interpreter', 'latex');
 % % % title('Speed in the Middle Plane','FontSize',48);
-% % set(gca,'FontSize',36)
+% set(gca,'FontSize',20)
 % legend('PIV','Simulation','location','best','FontSize',20)
 % xlim([-0.5 115])
 % % f=gcf;
@@ -249,8 +249,9 @@ end
 % Foo = 1 / (1 - 192*a*Sigma2/(pi^5*b));
 % f = (12*Q)/((pi)^3*a*b)*Sigma1*Foo;
 % plot(z+26, f, 'LineWidth', 2, 'Color','y'); hold on
-% xlabel('$Z\ ({\mu}m)$','FontSize',18,'Interpreter', 'latex');
-% ylabel('$U_x\ ({\mu}m/s)$','FontSize',18,'Interpreter', 'latex');
+% xlabel('$Z\ ({\mu}m)$','FontSize',22,'Interpreter', 'latex');
+% ylabel('$U_x\ ({\mu}m/s)$','FontSize',22,'Interpreter', 'latex');
+% set(gca,'FontSize',20)
 % xlim([-0.5 52.5])
 % legend('PIV','Simulation','Theory','location','best','FontSize',20)
 % % f=gcf;
@@ -258,31 +259,33 @@ end
 
 
 %%% Velocity profile along the spanwise-direction (absolute value).
-UUU_alongY = UUU_alongY/counting; VVV_alongY = VVV_alongY/counting;
-UUU_alongY_err = UUU_alongY_err/counting; VVV_alongY_err = VVV_alongY_err/counting;
-XXX_alongY = ave_field_phy.x;
-% errorbar(XXX_alongY, VVV_alongY*1e6, VVV_alongY_err*1e6,'LineStyle','none', 'Marker','*','MarkerSize', 5)
-plot(XXX_alongY(1:end-2), VVV_alongY(1:end-2)*1e6,'LineStyle','none', 'Marker','*','MarkerSize', 5); hold on % (end - 2): remove the 0 value.
-% % % theory
-a = 200;   % height/2 (um)
-b = 26; % width/2 (um)
-Q = 2 * 10^(6); %flow rate (nL! the number before *)
-y = 0;
-z = -a:(2*a/100):a;
-Sigma1 = 0; Sigma2 = 0;
-for i = 1:2:10^2
-    Sigma1 = Sigma1 + (-1)^((i-1)/2)*(1-(cosh(i*pi*y/(2*a)))/(cosh(i*pi*b/(2*a))))*(cos(i*pi*z/(2*a)))/(i^3);
-    Sigma2 = Sigma2 + (tanh(i*pi*b/(2*a)))/(i^5);
-end
-Foo = 1 / (1 - 192*a*Sigma2/(pi^5*b));
-f = (12*Q)/((pi)^3*a*b)*Sigma1*Foo;
-plot(z+212.5, f, 'LineWidth', 2, 'Color','y'); hold on
-xlabel('$Y\ ({\mu}m)$','FontSize',18,'Interpreter', 'latex');
-ylabel('$U_x\ ({\mu}m/s)$','FontSize',18,'Interpreter', 'latex');
-xlim([-0.5 420.5])
-legend('PIV','Theory','location','best','FontSize',20)
-% f=gcf;
-% exportgraphics(f,'D:\Dropbox\Research\All Plottings\General plots\20220811_PIV-Theory_BlankArea_H52_Ux-Y.png','Resolution',100)
+% figure('color', 'w'); set(gcf, 'Position', [100 100 600 450]);
+% UUU_alongY = UUU_alongY/counting; VVV_alongY = VVV_alongY/counting;
+% UUU_alongY_err = UUU_alongY_err/counting; VVV_alongY_err = VVV_alongY_err/counting;
+% XXX_alongY = ave_field_phy.x;
+% % errorbar(XXX_alongY, VVV_alongY*1e6, VVV_alongY_err*1e6,'LineStyle','none', 'Marker','*','MarkerSize', 5)
+% plot(XXX_alongY(1:end-2), VVV_alongY(1:end-2)*1e6,'LineStyle','none', 'Marker','*','MarkerSize', 5); hold on % (end - 2): remove the 0 value.
+% % % % theory
+% a = 200;   % height/2 (um)
+% b = 26; % width/2 (um)
+% Q = 2 * 10^(6); %flow rate (nL! the number before *)
+% y = 0;
+% z = -a:(2*a/100):a;
+% Sigma1 = 0; Sigma2 = 0;
+% for i = 1:2:10^2
+%     Sigma1 = Sigma1 + (-1)^((i-1)/2)*(1-(cosh(i*pi*y/(2*a)))/(cosh(i*pi*b/(2*a))))*(cos(i*pi*z/(2*a)))/(i^3);
+%     Sigma2 = Sigma2 + (tanh(i*pi*b/(2*a)))/(i^5);
+% end
+% Foo = 1 / (1 - 192*a*Sigma2/(pi^5*b));
+% f = (12*Q)/((pi)^3*a*b)*Sigma1*Foo;
+% plot(z+212.5, f, 'LineWidth', 2, 'Color','y'); hold on
+% xlabel('$Y\ ({\mu}m)$','FontSize',22,'Interpreter', 'latex');
+% ylabel('$U_x\ ({\mu}m/s)$','FontSize',22,'Interpreter', 'latex');
+% set(gca,'FontSize',20)
+% xlim([-0.5 420.5])
+% legend('PIV','Theory','location','best','FontSize',20)
+% % f=gcf;
+% % exportgraphics(f,'D:\Dropbox\Research\All Plottings\General plots\20220811_PIV-Theory_BlankArea_H52_Ux-Y.png','Resolution',100)
 
 
 
