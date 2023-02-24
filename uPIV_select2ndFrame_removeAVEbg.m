@@ -5,11 +5,11 @@ set(0, 'defaulttextinterpreter','latex');
 set(groot, 'defaultAxesTickLabelInterpreter','latex');  
 set(groot, 'defaultLegendInterpreter','latex');
 
-selpath = uigetdir(['Y:\Experimental Data (RAW)\FSI - Rigid Fiber &  Individu' ...
-    'al Obstacle\20220912_Channel2022-09-09_UpTrianglePillar_SU8fibre-and-Tracer\']);
+selpath = uigetdir(['Z:\Experimental Data (RAW)\FSI - Rigid Fiber &  Individual ' ...
+    'Obstacle\20220817_Channel2022-07-26_UpTrianglePillar_SU8fibre-and-Tracer\']);
 listing = dir(selpath);
-pathname = uigetdir(['D:\Dropbox\PROCESS remotely\Experimental Data (EXTRACT' ...
-    'ED)\'], 'Choose a folder to save the results');
+pathname = uigetdir(['F:\Experimental Data (EXTRACTED)\FSI - Rigid Fiber &  ' ...
+    'Individual Obstacle\20220817_Channel2022-07-26_UpTrianglePillar_SU8fibre-and-Tracer\'], 'Choose a folder to save the results');
 
 Names = {listing.name};  % the file/folder names
 cases_ind = contains(Names,'Lateral'); % only select cases.
