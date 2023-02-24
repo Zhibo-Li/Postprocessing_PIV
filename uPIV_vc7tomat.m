@@ -77,6 +77,6 @@ set(gca,'FontSize',20)
 figure('color', 'w'); set(gcf, 'Position', [100 100 600 450]);
 VV_x = ave_field_phy.vy(:, round(size(ave_field_phy.vy,2)/2));
 plot(ave_field_phy.x, VV_x, 'LineStyle','none', 'Marker','*','MarkerSize', 5);
-xlabel('$Y\ ({\mu}m)$','FontSize',22,'Interpreter', 'latex');
+xlabel('$X\ ({\mu}m)$','FontSize',22,'Interpreter', 'latex');
 ylabel('$U_y\ ({\mu}m/s)$','FontSize',22,'Interpreter', 'latex');
 set(gca,'FontSize',20)
