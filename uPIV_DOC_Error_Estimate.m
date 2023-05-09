@@ -20,7 +20,7 @@ SI=struct('meter',1,'second',1,'minute',60,'hour',3600,'newton',1,'joule',1,'kg'
 % mu = 340e-3; % viscosity, unit: Pa.s
 % 
 % epsilon_DOC = 0.01;
-% NA = 0.3; % numerical aperture
+% NA = 0.25; % numerical aperture
 % MM = 10; % magnitude
 % n_0 = 1; % refractive index
 % lambda_DOC = 532e-9; % wavelength, unit: m
