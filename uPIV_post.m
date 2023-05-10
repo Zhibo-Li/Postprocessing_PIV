@@ -104,7 +104,8 @@ Channel_height_Z_exp = abs(sqrt(fitobject.p2^2 - 4*fitobject.p1*fitobject.p3)/fi
 
 f=gcf;
 savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation-Theory_BlankArea_H52_Ux-Z.fig')
-exportgraphics(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation-Theory_BlankArea_H52_Ux-Z.eps')
+set(f,'renderer','Painters');
+print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation-Theory_BlankArea_H52_Ux-Z.eps')
 
 
 %% Velocity profile along the spanwise-direction (absolute value).
@@ -145,7 +146,8 @@ xlim([0 400]); ylim([0 200])
 
 f=gcf;
 savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Theory_BlankArea_H52_Ux-Y.fig')
-exportgraphics(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Theory_BlankArea_H52_Ux-Y.eps')
+set(f,'renderer','Painters');
+print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Theory_BlankArea_H52_Ux-Y.eps')
 
 
 %%
@@ -265,7 +267,8 @@ xlim([-0.5 52.5])
 % exportgraphics(f,'D:\Dropbox\Research\All Plottings\General plots\20220811_PIV-Simulation_PAsArea_H52_Ux-Z.png','Resolution',100)
 f=gcf;
 savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation_PAsArea_H52_Ux-Z.fig')
-exportgraphics(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation_PAsArea_H52_Ux-Z.eps')
+set(f,'renderer','Painters');
+print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation_PAsArea_H52_Ux-Z.eps')
 
 
 %%% Velocity profile along the z-direction (normalized).
@@ -287,7 +290,8 @@ xlim([0 1])
 % exportgraphics(f,'D:\Dropbox\Research\All Plottings\General plots\20220811_PIV-Simulation_PAsArea_H52_Ux-Z_normalized.png','Resolution',100)    
 f=gcf;
 savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation_PAsArea_H52_Ux-Z_normalized.fig')
-exportgraphics(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation_PAsArea_H52_Ux-Z_normalized.eps')
+set(f,'renderer','Painters');
+print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation_PAsArea_H52_Ux-Z_normalized.eps')
 
 
 %% Velocity profile along the flow-direction (absolute value).
@@ -309,7 +313,8 @@ xlim([-0.5 115])
 % exportgraphics(f,'D:\Dropbox\Research\All Plottings\General plots\20220811_PIV-Simulation_PAsArea_H52_Ux-X.png','Resolution',100)  
 f=gcf;
 savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation_PAsArea_H52_Ux-X.fig')
-exportgraphics(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation_PAsArea_H52_Ux-X.eps')
+set(f,'renderer','Painters');
+print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation_PAsArea_H52_Ux-X.eps')
 
 
 %% Velocity profile along the flow-direction (normalized).
@@ -331,6 +336,7 @@ xlim([-0.5 115]); ylim([-0.2 1.8])
 % exportgraphics(f,'D:\Dropbox\Research\All Plottings\General plots\20220811_PIV-Simulation_PAsArea_H52_Ux-X_normalized.png','Resolution',100)  
 f=gcf;
 savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation_PAsArea_H52_Ux-X_normalized.fig')
-exportgraphics(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation_PAsArea_H52_Ux-X_normalized.eps')
+set(f,'renderer','Painters');
+print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\20220811_PIV-Simulation_PAsArea_H52_Ux-X_normalized.eps')
 
 
