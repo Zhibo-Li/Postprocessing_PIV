@@ -1,7 +1,7 @@
 %%% convert *.vc7 to *.mat and convert to physical unit (um/s) and plotting
 % direction: x -- spanwise
 %            y -- streamwise
-%            z -- spanwise
+%            z -- channel height
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear; close all; clc
