@@ -116,7 +116,7 @@ colormap('jet')
 caxis([0 1.5])
 
 c = colorbar;
-c.Label.String = '$U/U_{\rm max,ch}$';
+c.Label.String = '$u_x/U_{\rm max,ch}$';
 c.Label.Interpreter = 'LaTeX';
 c.TickLabelInterpreter = 'LaTeX';
 c.FontSize = 18;
@@ -134,7 +134,7 @@ end
 hold on
 line([ave_field_phy.y(obs_center(1)) ave_field_phy.y(obs_center(1))], [0 900], 'Color', [77,175,74]/255, 'LineWidth', 2); hold on
 line([0 900], [ave_field_phy.x(obs_center(2)) ave_field_phy.x(obs_center(2))], 'Color', [77,175,74]/255, 'LineWidth', 2); hold on
-text(35,940,'Experiment','FontSize',18)
+text(35,945,'Experiment','FontSize',18)
 
 f=gcf;
 savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_flowfield.fig')
