@@ -48,7 +48,7 @@ figure('color', 'w'); set(gcf, 'Position', [100 100 650 200]);
 cmocean('dense');
 caxis([0 3])
 c = colorbar;
-c.Label.String = 'Flow-strength parameter: $\delta$';
+c.Label.String = 'Flow-strength parameter: $\sigma$';
 c.Label.Interpreter = 'LaTeX';
 c.TickLabelInterpreter = 'LaTeX';
 c.FontSize = 14;
