@@ -136,10 +136,10 @@ line([ave_field_phy.y(obs_center(1)) ave_field_phy.y(obs_center(1))], [0 900], '
 line([0 900], [ave_field_phy.x(obs_center(2)) ave_field_phy.x(obs_center(2))], 'Color', [77,175,74]/255, 'LineWidth', 2); hold on
 text(35,945,'Experiment','FontSize',18)
 
-f=gcf;
-savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_flowfield.fig')
-set(f,'renderer','Painters');
-print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_flowfield.eps')
+% f=gcf;
+% savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_flowfield.fig')
+% set(f,'renderer','Painters');
+% print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_flowfield.eps')
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -153,10 +153,10 @@ xlabel('$x\ (\mathrm{\mu m})$');
 ylabel('$u_x/U_{\rm max, ch}$');
 legend('$\rm{Experiment}$','$\rm{Simulation}$','location','northeast')
 
-f=gcf;
-savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_Ux_X.fig')
-set(f,'renderer','Painters');
-print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_Ux_X.eps')
+% f=gcf;
+% savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_Ux_X.fig')
+% set(f,'renderer','Painters');
+% print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_Ux_X.eps')
 
 figure('color', 'w');  set_plot(gcf, gca)
 plot(profile_y_exp+expect_channel_halfWidth, profile_ux_y_exp,'Color', [77,175,74]/255, 'LineWidth', 2, ...
@@ -166,7 +166,64 @@ xlim([0 800]); ylim([0 2])
 xlabel('$y\ (\mathrm{\mu m})$');
 ylabel('$u_x/U_{\rm max, ch}$');
 
+% f=gcf;
+% savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_Ux_Y.fig')
+% set(f,'renderer','Painters');
+% print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_Ux_Y.eps')
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% plot exp, OpenFOAM and LBM together
+
+% load LBM data
+load(['D:\Dropbox\Collaboration - LadHyX\Give_to_Zhibo_nonShared\Data_Give_' ...
+    'to_Zhibo_20230223\input_data\Mid_plane_data.mat']);
+
+% Plot UX along x
+y_middle = 201;
+ux_profile_along_x = UX_midplane(y_middle,:);
+X = XX(y_middle,:);
+
+figure('color', 'w');  set_plot(gcf, gca)
+plot(profile_x_exp, profile_ux_x_exp,'Color', 'c', 'LineWidth', 2, ...
+    'LineStyle','none', 'Marker','o','MarkerSize', 5); hold on
+plot(profile_x_sim, profile_ux_x_sim, 'color', 'm', 'LineWidth', 2); hold on
+plot((X - 600)*2,ux_profile_along_x/U_max, ':k', 'LineWidth', 3);  % LBM unit: LBM/physical: 2 µm (dx = dy = dz = 2 µm)
+xlim([-400 400]); ylim([0 1.5])
+xlabel('$x\ (\mathrm{\mu m})$');
+ylabel('$u_x/U_{\rm max, ch}$');
+legend('$\mu$PIV','OpenFOAM','LBM','location','northeast')
+
 f=gcf;
-savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_Ux_Y.fig')
+savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_LBM_Ux_X.fig')
 set(f,'renderer','Painters');
-print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_Ux_Y.eps')
+print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_LBM_Ux_X.eps')
+
+
+
+% Plot UX along y
+x_middle = 601;
+ux_profile_along_y = UX_midplane(:,x_middle);
+Y = YY(:,x_middle);
+
+figure('color', 'w');  set_plot(gcf, gca)
+plot(profile_y_exp+expect_channel_halfWidth, profile_ux_y_exp, 'Color', 'c', 'LineWidth', 2, ...
+    'LineStyle','none', 'Marker','o','MarkerSize', 5); hold on
+plot(profile_y_sim+expect_channel_halfWidth, profile_ux_y_sim, 'color', 'm', 'LineWidth', 2); hold on
+plot(Y*2,ux_profile_along_y/U_max, ':k', 'LineWidth', 3);  % LBM unit: LBM/physical: 2 µm (dx = dy = dz = 2 µm)
+xlim([0 800]); ylim([0 2])
+xlabel('$y\ (\mathrm{\mu m})$');
+ylabel('$u_x/U_{\rm max, ch}$');
+% legend('μPIV','OpenFOAM','LBM','location','northeast', 'Interpreter', 'tex', ...
+%     'fontname', 'Times new roman')
+
+f=gcf;
+savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_LBM_Ux_Y.fig')
+set(f,'renderer','Painters');
+print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_LBM_Ux_Y.eps')
+
+
+
+
+
