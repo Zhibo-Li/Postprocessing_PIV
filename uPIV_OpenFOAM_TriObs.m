@@ -79,9 +79,12 @@ for ii = 1:numel(startX)
     lineobj(ii).Color = 'k';
 end
 
+lineobj_sep = streamline(xx,yy,Ux_interp/U_max_ch,Uy_interp/U_max_ch, -4e-4, -0.0045e-4);
+lineobj_sep.LineWidth = 3; lineobj_sep.Color = 'm';
+
 hold on
-plot([0 0], [-7e-4,7e-4], 'Color', [228,26,28]/255, 'LineWidth', 2); hold on
-plot([-7e-4,7e-4], [0 0], 'Color', [228,26,28]/255, 'LineWidth', 2); hold on
+plot([0 0], [-7e-4,7e-4], 'Color', [228,26,28]/255, 'LineWidth', 1); hold on
+plot([-7e-4,7e-4], [0 0], 'Color', [228,26,28]/255, 'LineWidth', 1); hold on
 text(-4e-4,4.3e-4,'Simulation','FontSize',18)
 
 % load uPIV data (x, y are switched compared to the simulation)
@@ -131,15 +134,19 @@ for ii = 1:numel(startX)
     lineobj(ii).Color = 'k';
 end
 
+lineobj_sep = streamline(ave_field_phy.y,ave_field_phy.x,ave_field_phy.vy/U_max_ch_exp, ave_field_phy.vx/U_max_ch_exp, ...
+    ave_field_phy.y(obs_center(1))-real_channel_halfWidth, 525.4);
+lineobj_sep.LineWidth = 3; lineobj_sep.Color = 'm';
+
 hold on
-line([ave_field_phy.y(obs_center(1)) ave_field_phy.y(obs_center(1))], [0 900], 'Color', [77,175,74]/255, 'LineWidth', 2); hold on
-line([0 900], [ave_field_phy.x(obs_center(2)) ave_field_phy.x(obs_center(2))], 'Color', [77,175,74]/255, 'LineWidth', 2); hold on
+line([ave_field_phy.y(obs_center(1)) ave_field_phy.y(obs_center(1))], [0 900], 'Color', [77,175,74]/255, 'LineWidth', 1); hold on
+line([0 900], [ave_field_phy.x(obs_center(2)) ave_field_phy.x(obs_center(2))], 'Color', [77,175,74]/255, 'LineWidth', 1); hold on
 text(35,945,'Experiment','FontSize',18)
 
 % f=gcf;
-% savefig(f,'D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_flowfield.fig')
+% savefig(f,'D:\Dropbox\Research\Zhibo PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_flowfield_20231025.fig')
 % set(f,'renderer','Painters');
-% print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\My PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_flowfield.eps')
+% print('-depsc2','-tiff','-r100','-painters','D:\Dropbox\Research\Zhibo PhD thesis\Figures\2-methods\PIV\uPIV20221031_OpenFOAM_TriObs_flowfield_20231025.eps')
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
