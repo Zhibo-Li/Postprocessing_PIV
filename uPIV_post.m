@@ -172,6 +172,7 @@ PAsArea_ind = find(XblankArea==1); % the indices of the PAs folders.
 magni = 0.067; % the magnification of the objective (um/pixel)
 
 % get the cross-points among four adjacent pillars (in pixel). [Manually input]
+% DO NOT copy this code to get 'theCrossPoints' !! It's correct by coincidence.
 tiltshift = 2; thegap = 632;
 x1 = 491; y1 = 318;    x2 = 810; y2 = 630;
 theX1 = zeros(3,3); theY1 = zeros(3,3);   theX2 = zeros(3,3); theY2 = zeros(3,3);
