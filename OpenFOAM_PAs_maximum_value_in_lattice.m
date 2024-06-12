@@ -336,7 +336,7 @@ figure('color', 'w'); set(gcf, 'Position', [100 100 800 600]);
 
 plot(tilt_angle, flowStrength_interp_average, '*', 'MarkerSize', 15, 'MarkerEdgeColor', 'k'); 
 xlim([0 45]); 
-ylabel('$\sigma_{\rm sum}$','FontSize', 24,'Interpreter', 'latex');
+ylabel('$\sigma_{\rm mean}$','FontSize', 24,'Interpreter', 'latex');
 xlabel('$\alpha_0\,(^\circ)$','FontSize', 24,'Interpreter', 'latex');
 xticks([0:15:45]);
 
