@@ -24,6 +24,19 @@ for Array_angle = [0 45]
     % find the velocity gradient components
     velocity_gradient_column_ind = find(contains(Data_Titles, 'grad(U):'));
     velocity_gradient = Data_withoutTitles(:, velocity_gradient_column_ind);
+    % reshape the velocity gradient matrix
+    flowType_Zhibo = zeros(size(velocity_gradient, 1), 1);
+    for ii = 1: size(velocity_gradient, 1)
+
+        data = reshape(velocity_gradient(ii, :), [3, 3]);
+        data_sym = (data+data.')/2;
+        data_anti = (data-data.')/2;
+        
+        norm_E = norm(data_sym,'fro');
+        norm_O = norm(data_anti,'fro');
+        flowType_Zhibo(ii) = (norm_E-norm_O) / (norm_E+norm_O); % To check the flow-type parameter.
+
+    end
     
     % find the flowType
     flowType_column_ind = find(contains(Data_Titles, 'flowType'));
