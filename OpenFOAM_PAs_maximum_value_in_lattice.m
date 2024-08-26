@@ -351,7 +351,44 @@ print(hhh, '-dpdf',['D:\Dropbox\Research\Zhibo PhD thesis\Figures\5-flexible_fib
 
 
 
+%% Plot histogram of flowwType or flowStrength in the lattice
+clear; close all; clc
 
+load('D:\Dropbox\GitHub\Postprocessing_PIV\All_flowStrength_in_lattice.mat');
+% load('D:\Dropbox\GitHub\Postprocessing_PIV\All_flowType_in_lattice.mat');
+
+% edges = -1:0.02:1;
+edges = 0:0.05:5;
+for ii = 1:length(tilt_angle)
+
+    figure('color', 'w'); set(gcf, 'Position', [100 100 800 600]);
+    histogram(flowStrength_interp_All{ii}, edges,'Normalization','probability')
+
+%     xlim([-0.3 0.3]); ylim([0 0.5])
+    xlim([0 4]); ylim([0 0.2])
+    ylabel('Probability','FontSize', 24,'Interpreter', 'latex');
+    xlabel('FlowStrength: $\sigma$','FontSize', 24,'Interpreter', 'latex');
+%     xticks([-1:0.2:1]);
+
+    set(gca,'Box', 'On','XGrid', 'On', 'YGrid', 'On', 'GridAlpha', 0.5, 'FontSize', 24,'TickLabelInterpreter','latex')
+
+%     hhh = gcf;
+%     set(hhh,'Units','Inches');
+%     pos = get(hhh,'Position');
+%     set(hhh,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
+%     print(hhh, '-dpdf',['D:\Dropbox\Research\Zhibo PhD thesis\Figures\5-flexible_fiber_array' ...
+%         '\flow field\hist\flowStrength_hist_deg',num2str(tilt_angle(ii)),'.pdf']);
+    f = gcf;
+    saveas(f, ['D:\Dropbox\Research\Zhibo PhD thesis\Figures\5-flexible_fiber_array' ...
+         '\flow field\hist\flowStrength_hist_deg',num2str(tilt_angle(ii)),'.tif']);
+
+    close
+end
+
+
+
+
+%%
 function mask = createCirclesMask(varargin)
 % (xDim,yDim,centers,radii)
 % Create a binary mask from circle centers and radii
