@@ -1,4 +1,10 @@
 % % % % % % % % % % Plot velocity fields % % % % % % % % % %
+%
+% NOTICE 1: need to be very careful about the flow direction in the
+% experiments, especially when plot in a lattice!
+%
+% *NOTICE 2: particle images are transposed if the PIVlab calculations are 
+% based on *.im7 format!!!
 
 clear; close all; clc
 
@@ -54,19 +60,24 @@ for ii = 1:layersNUM
 
     load(fullfile(exp2proc,theFOLDER,theFILE)); % load the ensemblePIV results
 
-    vx_phy = u_filt{1,1} * magni / deltaT; % velocity in m/s.
-    vy_phy = v_filt{1,1} * magni / deltaT; % velocity in m/s.
-    x_phy = x{1,1} * magni; % velocity in um.
-    y_phy = y{1,1} * magni; % velocity in um.
+    vx_phy = v_filt{1,1}' * magni / deltaT; % velocity in m/s.
+    %   vx_phy = -(-v_filt{1,1})' * magni / deltaT;        % Here is the reason.
+    vy_phy = -u_filt{1,1}' * magni / deltaT; % velocity in m/s.
+    x_phy = y{1,1}' * magni; % velocity in um.    
+    %   x_phy = (size(circleMask, 1) - (size(circleMask, 1) - y{1,1}) )' * magni;         % Here is the reason.
+    y_phy = (size(circleMask, 1) - x{1,1})' * magni; % velocity in um.
+    % Consider NOTICE 2 and the fact that y{1,1} and v_filt{1,1} are in
+    % image coordinates when they are calculated. 
 
     % to mask out the pillars
     velocityMask = ~circleMask(PIV_step_size:PIV_step_size:end-PIV_step_size, ...
         PIV_step_size:PIV_step_size:end-PIV_step_size);
     velocityMask_double = double(velocityMask);
     velocityMask_double(~velocityMask) = nan;
-    vx_phy = vx_phy .* velocityMask_double'; vy_phy = vy_phy .* velocityMask_double';
+    vx_phy = vx_phy .* velocityMask_double; vy_phy = vy_phy .* velocityMask_double;
 
     figure('color', 'w','units','normalized','outerposition',[0 0 1 1]); 
+    % Plot as in the uPIV experiments.
     contourf(x_phy, y_phy, sqrt(vx_phy.^2 + vy_phy.^2),100,'LineStyle','none'); hold on 
     shading interp; axis equal;
     quiver(x_phy, y_phy, vx_phy, vy_phy, 'Color','k');

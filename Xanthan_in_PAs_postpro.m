@@ -1,4 +1,6 @@
 % % % % % % % % % % Plot velocity profiles % % % % % % % % % %
+%
+% Be very careful about the flow direction and the coordinate system.
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 

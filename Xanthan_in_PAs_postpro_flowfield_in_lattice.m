@@ -1,4 +1,10 @@
 %% Plot velocity fields within one lattice (for PEO or Xanthan)
+%
+% NOTICE 1: need to be very careful about the flow direction in the
+% experiments, especially when plot in a lattice!
+%
+% *NOTICE 2: particle images are transposed if the PIVlab calculations are 
+% based on *.im7 format!!!
 
 clear; close all; clc
 set(0, 'defaulttextinterpreter','latex');  
@@ -102,19 +108,23 @@ for ii = 1:layersNUM
 
     theFOLDER_no = str2double(extract(theFOLDER(end-2:end), digitsPattern));
 
-    vx_phy = u_filt{1,1} * magni / deltaT; % velocity in m/s.
-    vy_phy = v_filt{1,1} * magni / deltaT; % velocity in m/s.
-    x_pixel = x{1,1}; % x-coordinates in pixel
-    y_pixel = y{1,1}; % y-coordinates in pixel
-    x_phy = x{1,1} * magni; % x-coordinates in um.
-    y_phy = y{1,1} * magni; % y-coordinates in um.
+    vx_phy = v_filt{1,1}' * magni / deltaT; % velocity in m/s.
+    % vx_phy = -(-v_filt{1,1})' * magni / deltaT;        % Here is the reason.
+    vy_phy = -u_filt{1,1}' * magni / deltaT; % velocity in m/s.
+    x_phy = y{1,1}' * magni; % velocity in um.    
+    %  x_phy = (size(circleMask, 1) - (size(circleMask, 1) - y{1,1}) )' * magni;         % Here is the reason.
+    y_phy = (size(circleMask, 1) - x{1,1})' * magni; % velocity in um.
+    % Consider NOTICE 2 and the fact that y{1,1} and v_filt{1,1} are in
+    % image coordinates when they are calculated. 
+    x_pixel = y{1,1}'; % x-coordinates in pixel
+    y_pixel = (size(circleMask, 1) - x{1,1})'; % y-coordinates in pixel
 
     % to mask out the pillars
     velocityMask = ~circleMask(PIV_step_size:PIV_step_size:end-PIV_step_size, ...
         PIV_step_size:PIV_step_size:end-PIV_step_size);
     velocityMask_double = double(velocityMask);
     velocityMask_double(~velocityMask) = nan;
-    vx_phy = vx_phy .* velocityMask_double'; vy_phy = vy_phy .* velocityMask_double';
+    vx_phy = vx_phy .* velocityMask_double; vy_phy = vy_phy .* velocityMask_double;
     v_phy_mag = sqrt(vx_phy.^2 + vy_phy.^2);
     %%%%%% About the data loading (end) %%%%%%
 
@@ -147,14 +157,11 @@ for ii = 1:layersNUM
 
 
     %%%%%% Rotate into new coordinate and grid the data (start) %%%%%%
-    x_pixel_in_mask_coor = y_pixel;
-    y_pixel_in_mask_coor = size(circleMask, 1) - x_pixel; 
-    % x_pixel and y_pixel in mask image coordinate (to be concordance with pillar positions)
-    XY_rotated = (RotMatrix_correct * [x_pixel_in_mask_coor(:) y_pixel_in_mask_coor(:)]')';
+    XY_rotated = (RotMatrix_correct * [x_pixel(:) y_pixel(:)]')';
 %     figure; plot(XY_rotated(:,1), XY_rotated(:,2)); axis equal; hold on
 %     plot(centers_corrected(:,1), centers_corrected(:,2),'ro'); hold on
 
-    UV_rotated = (RotMatrix_correct * [vy_phy(:) -vx_phy(:)]')';
+    UV_rotated = (RotMatrix_correct * [vx_phy(:) vy_phy(:)]')';
     % NOTICE: vx and vy should be also converted!
     vx_phy_rotated = UV_rotated(:,1); vy_phy_rotated = UV_rotated(:,2); 
     v_phy_mag_in_col = v_phy_mag(:);
