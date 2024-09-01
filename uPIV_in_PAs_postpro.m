@@ -165,7 +165,7 @@ PIV_step_size = 8; % the step length of uPIV calculation (in pixel)
 Ctr2Ctr = 30; % the pillar center-to-center distance (um)
 Ctr2Ctr_pixel = Ctr2Ctr/magni; % the pillar center-to-center distance (pixel)
 
-Plot_resol = 0.02; % plotting resolution in the lattice
+Plot_resol = 0.05; % plotting resolution in the lattice
 % time_interval = 1/15*(500/20); % time interval for sampling (s) [NB: needed only for time fluctuation analysis]
 
 mother_save_path = 'Z:\Processing & Results\PIV & PTV\Figures\';
@@ -250,6 +250,13 @@ for ii = 1:layersNUM
     RotMatrix_correct = rotz(-Array_angle-corrected_angle);
     RotMatrix_correct = RotMatrix_correct(1:2, 1:2);
     centers_corrected = (RotMatrix_correct * centers_flip')';
+
+    exclude_edge_thickness = 50; % in pixel
+    centers_flip(centers_flip(:, 1) < exclude_edge_thickness/magni, :) = [];
+    centers_flip(centers_flip(:, 1) > size(circleMask, 2)-exclude_edge_thickness/magni, :) = [];
+    centers_flip(centers_flip(:, 2) < exclude_edge_thickness/magni, :) = [];
+    centers_flip(centers_flip(:, 2) > size(circleMask, 1)-exclude_edge_thickness/magni, :) = [];
+    centers_corrected_far_from_edge = (RotMatrix_correct * centers_flip')'; % remove the pillars too close to the edge.
     % viscircles(centers_corrected, radii,'LineStyle','--','LineWidth', 0.5, 'Color', 'r'); axis equal; hold on
     %%%%%% About the coordinates rotation (end) %%%%%%
 
@@ -357,12 +364,12 @@ for ii = 1:layersNUM
 
             jj_star = size(v_phy_mag_grid, 1)-jj+1; % for convenience
 
-            for pp = 1:size(centers_corrected,1)
+            for pp = 1:size(centers_corrected_far_from_edge,1)
 
-                select_ind = find(XY_rotated(:,2)>lower_lim+centers_corrected(pp,2) & ...
-                    XY_rotated(:,2)<upper_lim+centers_corrected(pp,2) & ...
-                    XY_rotated(:,1)>left_lim+centers_corrected(pp,1) & ...
-                    XY_rotated(:,1)<right_lim+centers_corrected(pp,1));
+                select_ind = find(XY_rotated(:,2)>lower_lim+centers_corrected_far_from_edge(pp,2) & ...
+                    XY_rotated(:,2)<upper_lim+centers_corrected_far_from_edge(pp,2) & ...
+                    XY_rotated(:,1)>left_lim+centers_corrected_far_from_edge(pp,1) & ...
+                    XY_rotated(:,1)<right_lim+centers_corrected_far_from_edge(pp,1));
 
                 U_rotated_grid{jj_star,kk} = [U_rotated_grid{jj_star,kk}; vx_phy_rotated(select_ind)];
                 V_rotated_grid{jj_star,kk} = [V_rotated_grid{jj_star,kk}; vy_phy_rotated(select_ind)];
