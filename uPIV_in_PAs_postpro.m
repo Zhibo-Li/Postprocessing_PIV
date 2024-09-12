@@ -101,7 +101,13 @@ for ii = 1:layersNUM
     figure('color', 'w','units','normalized','outerposition',[0 0 1 1]); 
     contourf(x_phy, y_phy, sqrt(vx_phy.^2 + vy_phy.^2),100,'LineStyle','none'); hold on 
     shading interp; axis equal;
-    quiver(x_phy, y_phy, vx_phy, vy_phy, 'Color','k');
+    % get the streamline coordinates:
+    StartX = 145*ones(1, 50); StartY = linspace(0, 140, 52); StartY = StartY(2:end-1);
+    streamline(x_phy, y_phy, vx_phy, vy_phy, StartX, StartY);
+    xy_stream = stream2(x_phy, y_phy, vx_phy, vy_phy, StartX, StartY);
+
+    
+%     quiver(x_phy, y_phy, vx_phy, vy_phy, 'Color','k');
 %     xlabel('$x\ (\mathrm{\mu m})$');
 %     ylabel('$y\ (\mathrm{\mu m})$');
     axis off
@@ -437,7 +443,9 @@ for ii = 1:layersNUM
             figure('color', 'w','units','normalized','outerposition',[0 0 1 1]);
             contourf(lattice_X, lattice_Y, v_phy_mag_grid/max(max(v_phy_mag_grid)), 100,'LineStyle','none'); hold on
             shading interp; axis equal; axis off
-            quiver(lattice_X, lattice_Y, U_rotated_grid, V_rotated_grid, 'Color','k');
+            StartX = 1*ones(1, 8); StartY = linspace(r_pillar, 1-r_pillar, 10); StartY = StartY(2:end-1);
+            streamline(lattice_X, lattice_Y, U_rotated_grid, V_rotated_grid, StartX, StartY);
+%             quiver(lattice_X, lattice_Y, U_rotated_grid, V_rotated_grid, 'Color','k');
             cmocean('speed'); caxis([0 1]);
             viscircles([0, 0; 0, 1; 1, 0; 1, 1], r_pillar*ones(4,1),'Color','b');
             xlim([0 1]); ylim([0 1]); 
