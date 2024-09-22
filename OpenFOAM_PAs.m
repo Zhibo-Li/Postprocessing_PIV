@@ -50,7 +50,9 @@ for Array_angle = 0:5:45
     % To plot
     figure('color', 'w'); set(gcf, 'Position', [100 100 600 600]);
     % Plot contour: |U|
-    contourf(xx,yy,sqrt(Ux_interp.^2+Uy_interp.^2)/U_0,100,'LineStyle','none');
+    U_abs = sqrt(Ux_interp.^2+Uy_interp.^2);
+    contourf(xx,yy,U_abs/max(max(U_abs)),100,'LineStyle','none');
+%     contourf(xx,yy,sqrt(Ux_interp.^2+Uy_interp.^2)/U_0,100,'LineStyle','none');
     shading interp
     axis equal; axis off
 
@@ -66,7 +68,7 @@ for Array_angle = 0:5:45
     ylim([0 3]*1e-4)
 
     cmocean('speed');
-    caxis([0 5])
+    caxis([0 1])
 %     c = colorbar;
 %     c.Label.String = '$U/U_0$';
 %     c.Label.Interpreter = 'LaTeX';
@@ -94,12 +96,19 @@ for Array_angle = 0:5:45
         end
     end
 
+% % %     f=gcf;
+% % %     savefig(f,['D:\Dropbox\Research\My PhD thesis\Figures\5-flexible_fiber_array' ...
+% % %         '\OpenFOAM_PAs_Umag_Deg', num2str(Array_angle), '.fig'])
+% % %     set(f,'renderer','Painters');
+% % %     print('-depsc2','-tiff','-r100','-vector',['D:\Dropbox\Research\My PhD thesis\' ...
+% % %         'Figures\5-flexible_fiber_array\OpenFOAM_PAs_Umag_Deg', num2str(Array_angle), '.eps'])
+
     f=gcf;
-    savefig(f,['D:\Dropbox\Research\My PhD thesis\Figures\5-flexible_fiber_array' ...
-        '\OpenFOAM_PAs_Umag_Deg', num2str(Array_angle), '.fig'])
+    savefig(f,['F:\Processing & Results\Actin Filaments in Porous Media\Figures\flow field' ...
+        '\OpenFOAM_PAs_UmagbyUmax_Deg', num2str(Array_angle), '.fig'])
     set(f,'renderer','Painters');
-    print('-depsc2','-tiff','-r100','-vector',['D:\Dropbox\Research\My PhD thesis\' ...
-        'Figures\5-flexible_fiber_array\OpenFOAM_PAs_Umag_Deg', num2str(Array_angle), '.eps'])
+    print('-depsc2','-tiff','-r100','-vector',['F:\Processing & Results\Actin Filaments in Porous Media' ...
+        '\Figures\flow field\OpenFOAM_PAs_UmagbyUmax_Deg', num2str(Array_angle), '.eps'])
 
     close
 
