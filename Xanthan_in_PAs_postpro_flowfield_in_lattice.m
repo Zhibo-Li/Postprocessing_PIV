@@ -285,6 +285,10 @@ for ii = 1:layersNUM
             exportgraphics(f,['Z:\Processing & Results\PIV & PTV\Figures\PEO\', ...
                 exp2proc(35:end),'_', theFOLDER(33:end), 'flowfield_in_lattice_ave.png'],'Resolution',100)
 
+            set(gcf,'renderer','Painters');
+            print('-depsc2','-tiff','-r100','-vector',['Z:\Processing & Results\PIV & PTV\Figures\PEO\', ...
+                exp2proc(35:end),'_', theFOLDER(33:end), 'flowfield_in_lattice_ave.eps']);
+
             %% Figures: flowtype in lattice (in between four pillars)
             figure('color', 'w','units','normalized','outerposition',[0 0 1 1]);
             contourf(lattice_X, lattice_Y, flow_type_grid, 100,'LineStyle','none');
@@ -308,6 +312,11 @@ for ii = 1:layersNUM
             f=gcf;
             exportgraphics(f,['Z:\Processing & Results\PIV & PTV\Figures\PEO\', ...
                 exp2proc(35:end),'_', theFOLDER(33:end), 'flowType_in_lattice_ave.png'],'Resolution',100)
+
+            set(gcf,'renderer','Painters');
+            print('-depsc2','-tiff','-r100','-vector',['Z:\Processing & Results\PIV & PTV\Figures\PEO\', ...
+                exp2proc(35:end),'_', theFOLDER(33:end), 'flowType_in_lattice_ave.eps']);
+
 
             close all
     end

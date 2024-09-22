@@ -443,18 +443,21 @@ for ii = 1:layersNUM
             figure('color', 'w','units','normalized','outerposition',[0 0 1 1]);
             contourf(lattice_X, lattice_Y, v_phy_mag_grid/max(max(v_phy_mag_grid)), 100,'LineStyle','none'); hold on
             shading interp; axis equal; axis off
-            StartX = 1*ones(1, 8); StartY = linspace(r_pillar, 1-r_pillar, 10); StartY = StartY(2:end-1);
-            streamline(lattice_X, lattice_Y, U_rotated_grid, V_rotated_grid, StartX, StartY);
-%             quiver(lattice_X, lattice_Y, U_rotated_grid, V_rotated_grid, 'Color','k');
+%             StartX = 1*ones(1, 8); StartY = linspace(r_pillar, 1-r_pillar, 10); StartY = StartY(2:end-1);
+%             streamline(lattice_X, lattice_Y, U_rotated_grid, V_rotated_grid, StartX, StartY);
+            quiver(lattice_X, lattice_Y, U_rotated_grid, V_rotated_grid, 'Color','k');
             cmocean('speed'); caxis([0 1]);
             viscircles([0, 0; 0, 1; 1, 0; 1, 1], r_pillar*ones(4,1),'Color','b');
             xlim([0 1]); ylim([0 1]); 
             camroll(180)
 
-            f=gcf;
-            exportgraphics(f,fullfile(mother_save_path, exp2proc_folderName, ...
-                [theFOLDER, '_flowfield_in_lattice_ave.png']),'Resolution',100)
+% % %             f=gcf;
+% % %             exportgraphics(f,fullfile(mother_save_path, exp2proc_folderName, ...
+% % %                 [theFOLDER, '_flowfield_in_lattice_ave.png']),'Resolution',100)
             
+            set(gcf,'renderer','Painters');
+            print('-depsc2','-tiff','-r100','-vector',fullfile(mother_save_path, ...
+                exp2proc_folderName,[theFOLDER, '__flowfield_in_lattice_ave.eps']));
 
             %%% Figures: flowtype in lattice (in between four pillars)
             figure('color', 'w','units','normalized','outerposition',[0 0 1 1]);
@@ -469,9 +472,13 @@ for ii = 1:layersNUM
             xlim([0 1]); ylim([0 1]); 
             camroll(180)
 
-            f=gcf;
-            exportgraphics(f,fullfile(mother_save_path, exp2proc_folderName, ...
-                [theFOLDER, '_flowType_in_lattice_ave.png']),'Resolution',100)
+% % %             f=gcf;
+% % %             exportgraphics(f,fullfile(mother_save_path, exp2proc_folderName, ...
+% % %                 [theFOLDER, '_flowType_in_lattice_ave.png']),'Resolution',100)
+
+            set(gcf,'renderer','Painters');
+            print('-depsc2','-tiff','-r100','-vector',fullfile(mother_save_path, ...
+                exp2proc_folderName,[theFOLDER, '_flowType_in_lattice_ave.eps']));
 
             close all
     end
