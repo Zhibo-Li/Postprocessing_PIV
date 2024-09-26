@@ -252,7 +252,11 @@ for ii = 1: length(C)
 
     f = figuresetting('centimeters',10,10,'times new roman',20,'off',2,'off','off');
     f.figure('');
-    plot(Lattice_in_all, Lattice_out_all, 'kx', 'LineStyle', 'none','MarkerSize', 5);
+    plot(Lattice_in_all, Lattice_out_all, 'Marker', 'x', 'color', [120, 120, 120]/255, 'LineStyle', 'none','MarkerSize', 5);
+%     plot(Lattice_in_all+0.03, Lattice_out_all+0.03, 'Marker', 'x',
+%     'color', [120, 120, 120]/255, 'LineStyle', 'none','MarkerSize', 5); %
+%    Correction only for flow angle of 35° !
+    
     cmocean('amp'); caxis([0 50]);
 %     hcb=colorbar; 
 %     set(hcb,'TickLabelInterpreter','latex','Fontsize',20);
@@ -320,16 +324,16 @@ for ii = 1: length(C)
         Lattice_in = Lattice_in(out_in_diff==0)';
         Lattice_out = Lattice_out(out_in_diff==0)';
 
-        plot(Lattice_in, Lattice_out, 'cx', 'LineStyle', 'none','MarkerSize', 3); hold on
+        plot(Lattice_in, Lattice_out, 'Marker','x', 'color', [56, 0, 248]/255,'LineStyle', 'none','MarkerSize', 3); hold on
 
     end
 
     set(gcf,'renderer','Painters');
     print('-depsc2','-tiff','-r100','-vector',fullfile(mother_save_path, ...
-        exp2proc_folderName, [exp2proc_case, 'Poincare.eps']));
+        exp2proc_folderName, [exp2proc_case, 'Poincare_with_simu.eps']));
 
     exportgraphics(gcf,fullfile(mother_save_path, exp2proc_folderName, ...
-        [exp2proc_case, 'Poincare.png']),'Resolution',100)
+        [exp2proc_case, 'Poincare_with_simu.png']),'Resolution',100)
 
 end
 
