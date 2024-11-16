@@ -239,7 +239,7 @@ for ii = 1:layersNUM
             contourf(lattice_X, lattice_Y, v_phy_mag_grid/max(max(v_phy_mag_grid)), 100,'LineStyle','none'); hold on
             shading interp; axis equal; axis off
             quiver(lattice_X, lattice_Y, U_rotated_grid, V_rotated_grid, 'Color','k');
-            cmocean('speed'); caxis([0 5]);
+            cmocean('speed'); clim([0 5]);
             viscircles([0.5, 0.5], r_pillar,'Color','b'); 
             camroll(-90)
 
@@ -251,7 +251,7 @@ for ii = 1:layersNUM
             figure('color', 'w','units','normalized','outerposition',[0 0 1 1]);
             contourf(lattice_X, lattice_Y, flow_type_grid, 100,'LineStyle','none');
             shading interp; axis equal; axis off
-            cmocean('balance'); caxis([-1 1])
+            cmocean('balance'); clim([-1 1])
 %             c = colorbar;
 %             c.Label.String = 'FlowType';
 %             c.TickLabelInterpreter = 'LaTeX';
@@ -266,11 +266,11 @@ for ii = 1:layersNUM
         case 'No'
             %% Figures: velocity field in lattice (in between four pillars)
             figure('color', 'w','units','normalized','outerposition',[0 0 1 1]);
-            contourf(lattice_X, lattice_Y, v_phy_mag_grid/max(max(v_phy_mag_grid)), 100,'LineStyle','none'); hold on
+            contourf(lattice_X, lattice_Y, v_phy_mag_grid/max(max(v_phy_mag_grid)), 100,'LineStyle','none','FaceAlpha',0.5); hold on
             shading interp; axis equal; axis off
             quiver(lattice_X, lattice_Y, U_rotated_grid, V_rotated_grid, 'Color','k');
-            cmocean('speed'); caxis([0 1]);
-            viscircles([0, 0; 0, 1; 1, 0; 1, 1], r_pillar*ones(4,1),'Color','b');
+            cmocean('speed'); clim([0 1]);
+            viscircles([0, 0; 0, 1; 1, 0; 1, 1], r_pillar*ones(4,1)+0.005,'Color','k', 'LineWidth', 10);
             xlim([0 1]); ylim([0 1]); 
             camroll(-90)
 
@@ -283,17 +283,17 @@ for ii = 1:layersNUM
 % %                 'exp_20240307_PEO4M1000ppm_100nL_Z27.52um_flowfield_in_lattice_ins_',num2str(theFOLDER_no),'.png'],'Resolution',100)
             f=gcf;
             exportgraphics(f,['Z:\Processing & Results\PIV & PTV\Figures\PEO\', ...
-                exp2proc(35:end),'_', theFOLDER(33:end), 'flowfield_in_lattice_ave.png'],'Resolution',100)
+                exp2proc(35:end),'_', theFOLDER(33:end), 'flowfield_in_lattice_ave_alpha0o5.png'],'Resolution',100)
 
             set(gcf,'renderer','Painters');
             print('-depsc2','-tiff','-r100','-vector',['Z:\Processing & Results\PIV & PTV\Figures\PEO\', ...
-                exp2proc(35:end),'_', theFOLDER(33:end), 'flowfield_in_lattice_ave.eps']);
+                exp2proc(35:end),'_', theFOLDER(33:end), 'flowfield_in_lattice_ave_alpha0o5.eps']);
 
             %% Figures: flowtype in lattice (in between four pillars)
             figure('color', 'w','units','normalized','outerposition',[0 0 1 1]);
             contourf(lattice_X, lattice_Y, flow_type_grid, 100,'LineStyle','none');
             shading interp; axis equal; axis off; 
-            cmocean('balance'); caxis([-1 1])
+            cmocean('balance'); clim([-1 1])
 %             c = colorbar;
 %             c.Label.String = 'FlowType';
 %             c.TickLabelInterpreter = 'LaTeX';
@@ -309,6 +309,7 @@ for ii = 1:layersNUM
 % %             f=gcf;
 % %             exportgraphics(f,['Z:\Processing & Results\PIV & PTV\Figures\PEO\20240307_100nL_Z27.52\', ...
 % %                 'exp_20240307_PEO4M1000ppm_100nL_Z27.52um_flowType_in_lattice_ins_',num2str(theFOLDER_no),'.png'],'Resolution',100)
+
             f=gcf;
             exportgraphics(f,['Z:\Processing & Results\PIV & PTV\Figures\PEO\', ...
                 exp2proc(35:end),'_', theFOLDER(33:end), 'flowType_in_lattice_ave.png'],'Resolution',100)
